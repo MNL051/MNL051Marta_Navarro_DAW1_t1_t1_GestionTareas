@@ -4,7 +4,36 @@ class Program
      static List <Tarea> tareas = new List<Tarea>();
     static void Main(string[] args)
     {
-       
+       bool continuar = true;
+       while (continuar){
+
+        Console.WriteLine("\nMenú de tareas, por favor seleccione una opción: ");
+        Console.WriteLine("1.Crear tarea");
+        Console.WriteLine("2.Buscar tarea por tipo");  
+        Console.WriteLine("3.Eliminar tarea");
+
+        string? opcion = Console.ReadLine(); 
+
+        switch (opcion)
+        {
+            case "1":
+                CrearTarea();
+                break;
+
+            case "2":
+                BuscarTarea();
+                break;
+
+            case "3":
+                ElminarTarea();
+                break;
+
+            default:
+                Console.WriteLine("\nTérmino erróneo. Intenteló de nuevo");
+                break;
+        }
+
+       }
     }
 
     static void CrearTarea(){ //falta asignar id automaticamnte y unico  
@@ -24,15 +53,18 @@ class Program
             tipo = Console.ReadLine();
         }
 
-        Console.WriteLine("¿Que prioridad tiene la tarea?: "); //por añadir
+        Console.WriteLine("¿Que prioridad tiene la tarea?: "); //por terminar
 
         tareas.Add(new Tarea{NombreTarea = nombreTarea, DescripcionTarea = descripcionTarea, Tipotarea = tipoTarea});
         Console.WriteLine("Tarea registrada");
 
+        Console.WriteLine("\nPresione cualquier tecla para volver al menú: ");
+        Console.ReadKey();
+
     }
  
      static void BuscarTarea(){  
-        Console.WriteLine("¿Que tipo de tarea desea buscar?");
+        Console.WriteLine("¿Que tipo de tarea desea buscar (Persona, Trabajo u Ocio)?");
 
         string? tipo = Console.ReadLine();
         TipoTarea tipoTarea;
