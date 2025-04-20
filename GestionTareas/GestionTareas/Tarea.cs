@@ -4,21 +4,29 @@ using System.Windows.Markup;
 
 class Tarea{
 
+    
+
+    private static int idContador = 1;
+
+     public Tarea(){
+        idTarea = idContador++;
+    }     
+
     private string? nombreTarea;
     private string? descripcionTarea;
     private bool?  prioridadTarea;
     private TipoTarea? tipoTarea;
-
-
-    private int? id;
+    private int idTarea;
 
     public string? NombreTarea {get => nombreTarea; set => nombreTarea = value;}
     public string? DescripcionTarea {get => descripcionTarea; set => descripcionTarea = value;}
     public TipoTarea? Tipotarea {get => tipoTarea; set => tipoTarea = value;}
     public bool? PrioridadTarea {get => prioridadTarea; set => prioridadTarea = value;}
+    public int IdTarea {get=> idTarea; set =>idTarea = value;}
+    
+    }
 
-    public int? Id {get=> id; set =>id = value;}
-}
+   
 
 enum TipoTarea{
     Persona,

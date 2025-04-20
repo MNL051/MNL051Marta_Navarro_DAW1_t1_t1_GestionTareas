@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 class Program
 {
      static List <Tarea> tareas = new List<Tarea>();
@@ -53,9 +54,9 @@ class Program
             tipo = Console.ReadLine();
         }
 
-        Console.WriteLine("¿Que prioridad tiene la tarea?: "); //por terminar
-
-        tareas.Add(new Tarea{NombreTarea = nombreTarea, DescripcionTarea = descripcionTarea, Tipotarea = tipoTarea});
+        Console.WriteLine("¿La tarea es prioritaria?: "); //por terminar la prioridad salga mensaje de Si o No 
+      
+        tareas.Add(new Tarea{NombreTarea = nombreTarea, DescripcionTarea = descripcionTarea, Tipotarea = tipoTarea,});
         Console.WriteLine("Tarea registrada");
 
         Console.WriteLine("\nPresione cualquier tecla para volver al menú: ");
@@ -64,6 +65,7 @@ class Program
     }
  
      static void BuscarTarea(){  
+
         Console.WriteLine("¿Que tipo de tarea desea buscar (Persona, Trabajo u Ocio)?");
 
         string? tipo = Console.ReadLine();
@@ -81,10 +83,11 @@ class Program
         if (tareasFiltradas.Any())
         /*"Any" me verifica si hay un elemento en la lista y me devuelve un true si hay o un false si esta vacia */
         {
-            Console.WriteLine("Tareas del tipo " + tipoTarea + " encontradas:");
+            Console.WriteLine("\nTareas del tipo " + tipoTarea + " encontradas:");
             foreach (var tarea in tareasFiltradas)
             {
                 //Console.WriteLine("Nombre: " + tarea.NombreTarea +", Descripción: " + tarea.DescripcionTarea +", Prioridad: " + tarea.PrioridadTarea);
+                Console.WriteLine("Id: " + tarea.IdTarea);
                 Console.WriteLine("Nombre: " + tarea.NombreTarea);
                 Console.WriteLine("Descripción: " + tarea.DescripcionTarea);
                 Console.WriteLine("Prioridad: " + tarea.PrioridadTarea);
@@ -92,12 +95,38 @@ class Program
         }
         else
         {
-            Console.WriteLine("\nNo se encontraron tareas de ese tipo.");
+            Console.WriteLine("\nNo se encontraron tareas de ese tipo");
         }
 
     }
 
-    static void ElminarTarea(){ //necesita id 
+    static void ElminarTarea(){ 
+
+    Console.WriteLine("Ingrese el id de la tarea a eliminar: ");
+
+    if(int.TryParse(Console.ReadLine(), out int idTarea))
+    {
+        var tareaAEliminar = tareas.FirstOrDefault(t => t.IdTarea == idTarea);
+
+        if (tareaAEliminar != null)
+        {
+            tareas.Remove(tareaAEliminar);
+            Console.WriteLine("Tarea"+ idTarea +"eliminada con éxito");
+        }
+        else
+        {
+            Console.WriteLine("No se encontró una tarea con ese Id");
+        }
+    }
+        else
+        {
+            Console.WriteLine("Id inválido. Por favor, ingrese un número válido.");
+            Console.ReadKey();
+
+
+        }
+        Console.WriteLine("\nPresione cualquier tecla para volver al menú:");
+        Console.ReadKey();
 
     }
 }
