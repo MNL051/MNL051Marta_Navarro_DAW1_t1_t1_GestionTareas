@@ -26,8 +26,6 @@ class Tarea{
     
     }
 
-   
-
 enum TipoTarea{
     Persona,
     Trabajo,

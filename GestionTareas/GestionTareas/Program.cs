@@ -29,6 +29,10 @@ class Program
                 ElminarTarea();
                 break;
 
+            case "4":
+                ExportarTareas();
+                break;
+
             default:
                 Console.WriteLine("\nTérmino erróneo. Intenteló de nuevo");
                 break;
@@ -37,7 +41,7 @@ class Program
        }
     }
 
-    static void CrearTarea(){ //falta asignar id automaticamnte y unico  
+    static void CrearTarea(){ 
 
         Console.WriteLine("Ingrese el nombre de la tarea: ");
         string? nombreTarea = Console.ReadLine();
@@ -54,9 +58,12 @@ class Program
             tipo = Console.ReadLine();
         }
 
-        Console.WriteLine("¿La tarea es prioritaria?: "); //por terminar la prioridad salga mensaje de Si o No 
+        Console.WriteLine("¿La tarea es prioritaria?: ");
+          string? respuestaPrioridad = Console.ReadLine();
+          bool prioridadBool = respuestaPrioridad != null && (respuestaPrioridad.ToLower() == "sí" || respuestaPrioridad.ToLower() == "si");
+          //.ToLower() para que no importe si se escribe en mayuscula o minuscula, y == "si" para que no importe si la persona escribe "si" o "sí"
       
-        tareas.Add(new Tarea{NombreTarea = nombreTarea, DescripcionTarea = descripcionTarea, Tipotarea = tipoTarea,});
+        tareas.Add(new Tarea{NombreTarea = nombreTarea, DescripcionTarea = descripcionTarea, Tipotarea = tipoTarea, PrioridadTarea = prioridadBool});
         Console.WriteLine("Tarea registrada");
 
         Console.WriteLine("\nPresione cualquier tecla para volver al menú: ");
@@ -74,7 +81,7 @@ class Program
         {
             Console.WriteLine("Tipo erróneo. Por favor, ingrese un tipo válido (Persona, Trabajo u Ocio): ");
             tipo = Console.ReadLine();
-        }
+        } 
 
         var tareasFiltradas = tareas.Where(t => t.Tipotarea == tipoTarea).ToList();
         //tareasFiltradas para guardar las tareas solicitadas
@@ -86,11 +93,13 @@ class Program
             Console.WriteLine("\nTareas del tipo " + tipoTarea + " encontradas:");
             foreach (var tarea in tareasFiltradas)
             {
+                string prioridadTexto = tarea.PrioridadTarea == true ? "Alta" : "Baja"; 
+                
                 //Console.WriteLine("Nombre: " + tarea.NombreTarea +", Descripción: " + tarea.DescripcionTarea +", Prioridad: " + tarea.PrioridadTarea);
                 Console.WriteLine("Id: " + tarea.IdTarea);
                 Console.WriteLine("Nombre: " + tarea.NombreTarea);
                 Console.WriteLine("Descripción: " + tarea.DescripcionTarea);
-                Console.WriteLine("Prioridad: " + tarea.PrioridadTarea);
+                Console.WriteLine("Prioridad: " + prioridadTexto);
             }
         }
         else
@@ -129,4 +138,23 @@ class Program
         Console.ReadKey();
 
     }
+
+    static void ExportarTareas(){
+
+        string rutaArchivo = @"C:\Users\Navar\Documents\UE_ProgramacionVisualStudio\3Trimestre_Fundamentos\Marta_Navarro_DAW1_t1_t1\MNL051Marta_Navarro_DAW1_t1_t1_GestionTareas";
+       
+            using (StreamWriter writer = new StreamWriter(rutaArchivo)) 
+            {
+                foreach (var tarea in tareas)
+                {
+                    writer.WriteLine("Id: " + tarea.IdTarea + ", Nombre: " + tarea.NombreTarea +", Descripción: " + tarea.DescripcionTarea +", Prioridad: " + tarea.PrioridadTarea);
+                }
+        } 
+       
+        Console.WriteLine("Tareas exportadas a tareas.txt");
+        Console.WriteLine("\nPresione cualquier tecla para volver al menú:");
+        Console.ReadKey();
+    }
+
+
 }
