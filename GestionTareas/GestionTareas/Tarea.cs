@@ -4,19 +4,30 @@ using System.Windows.Markup;
 
 class Tarea{
 
-    
-
     private static int idContador = 1;
-
-     public Tarea(){
-        idTarea = idContador++;
-    }     
-
     private string? nombreTarea;
     private string? descripcionTarea;
     private bool?  prioridadTarea;
     private TipoTarea? tipoTarea;
     private int idTarea;
+
+    //Constructor  
+     public Tarea(){
+     idTarea = idContador++;   
+    }     
+
+   
+    //Constructor  
+    public Tarea(int idContador, string nombreTarea, string descripcionTarea, TipoTarea tipoTarea, bool prioridadTarea){
+        this.nombreTarea = nombreTarea;
+        this.descripcionTarea = descripcionTarea;
+        this.tipoTarea = tipoTarea;
+        this.prioridadTarea = prioridadTarea;
+        this.idTarea = idContador;
+        
+    }
+
+
 
     public string? NombreTarea {get => nombreTarea; set => nombreTarea = value;}
     public string? DescripcionTarea {get => descripcionTarea; set => descripcionTarea = value;}
