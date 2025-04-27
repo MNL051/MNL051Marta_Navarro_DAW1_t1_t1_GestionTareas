@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 class Program
 {
      static List <Tarea> tareas = new List<Tarea>();
@@ -129,7 +128,7 @@ class Program
         if (tareaAEliminar != null)
         {
             tareas.Remove(tareaAEliminar);
-            Console.WriteLine("Tarea"+ idTarea +"eliminada con éxito");
+            Console.WriteLine("Tarea: "+ idTarea +" eliminada con éxito");
         }
         else
         {

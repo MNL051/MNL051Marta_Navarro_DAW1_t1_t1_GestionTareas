@@ -16,7 +16,6 @@ class Tarea{
      idTarea = idContador++;   
     }     
 
-   
     //Constructor  
     public Tarea(int idContador, string nombreTarea, string descripcionTarea, TipoTarea tipoTarea, bool prioridadTarea){
         this.nombreTarea = nombreTarea;
@@ -24,10 +23,7 @@ class Tarea{
         this.tipoTarea = tipoTarea;
         this.prioridadTarea = prioridadTarea;
         this.idTarea = idContador;
-        
     }
-
-
 
     public string? NombreTarea {get => nombreTarea; set => nombreTarea = value;}
     public string? DescripcionTarea {get => descripcionTarea; set => descripcionTarea = value;}
